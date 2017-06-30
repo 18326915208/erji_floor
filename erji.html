@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/public.css"/>
+		<style type="text/css">
+			.left{width:160px;background:#6e6568;margin-right:20px;}
+			.left #allul{padding:10px 0;position: relative;}
+			.left #allul li{font:12px/30px "微软雅黑";padding:0 10px;}
+			.left #allul li.ullist{background:rgba(255,255,255,.2);color:#fff;}
+			.left #allul li a{color:#fff;}
+			.left #allul li a:hover{color:#f00;}
+			.left #allul li span{color:#fff;margin:0 3px;}
+			.left #allul li p{opacity:0;filter:alpha(opacity=0);position: absolute;color:#333;left:160px;top:0;z-index:10;width:800px;height:450px;background:#ff9;padding:10px 20px;}
+			
+			
+			/*.left #allol{width:800px;height:450px;position: absolute;left:150px;top:0;z-index:10;}
+			.left #allol p{width:800px;height:450px;display:none;background:#f7f7f7;padding:10px 20px;}*/
+		</style>
+	</head>
+	<body>
+		<div class="left">
+			<ul id="allul">
+				<li>
+					<a href="#">冰想</a>
+					<p>蚌埠蚌埠不不不不不不不不不</p>
+				</li>
+				<li>
+					<a href="#">家电冰想</a>
+					<p>四十四柔柔弱弱若若所</p>
+				</li>
+				<li>
+					<a href="#">家电冰想</a>
+					<p>四十四所所所所所所所所所所所所所</p>
+				</li>
+				<li>
+					<a href="#">家冰</a><span>/</span><a href="#">理财</a><span>/</span><a href="#">保险</a>
+					<p>四啛啛喳喳错错错错错错错错所</p>
+				</li>
+				<li>
+					<a href="#">家电</a><span>/</span><a href="#">冰想</a>
+					<p>四十四所啛啛少时诵诗书所所所所所所</p>
+				</li>
+				<li>
+					<a href="#">家电冰想</a>
+					<p>四十四所少时诵诗书所撒奥奥奥奥奥奥奥所所所所</p>
+				</li>
+				<li>
+					<a href="#">家电冰想冰想</a>
+					<p>四十四吾问无为谓无无无无无无无无无无无所所所所</p>
+				</li>
+				<li>
+					<a href="#">家冰想</a>
+					<p>四十四所所所所所所所所所所所所所</p>
+				</li>
+				<li>
+					<a href="#">家冰</a><span>/</span><a href="#">理财</a>
+					<p>四十四所所所所所所所所所所所所所</p>
+				</li>
+				<li>
+					<a href="#">家冰</a><span>/</span><a href="#">理财</a><span>/</span><a href="#">保险</a>
+					<p>四十四所所所所所所所所所所所所所</p>
+				</li>
+				<li>
+					<a href="#">家电</a><span>/</span><a href="#">冰想</a>
+					<p>四十四所所所所所所所所所所所所所</p>
+				</li>
+				<li>
+					<a href="#">家电冰想</a>
+					<p>四十四所所所所所所所所所所所所所</p>
+				</li>
+				<li>
+					<a href="#">家冰想冰想电</a>
+					<p>四十四所所所所所所所所所所所所所</p>
+				</li>
+				<li>
+					<a href="#">家电冰想</a>
+					<p>四十四所所所所所所所所所所所所所</p>
+				</li>
+				<li>
+					<a href="#">家冰想冰想电</a>
+					<p>四十四所所所所所所所所所所所所所</p>
+				</li>
+			</ul>
+			
+		</div>
+		<script src="js/public.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var oAul=$("#allul");
+			var oAullist=$("li",oAul);
+			var oAolp=$("p",oAul);
+			console.log(oAullist.length);
+			for(var i=0;i<oAullist.length;i++){
+				oAullist[i].index=i;
+				oAullist[i].onmouseover=function(){
+					for(var i=0;i<oAullist.length;i++){
+						oAullist[i].className="";
+//						oAolp[i].style.display="none";
+						move(oAolp[i],{"opacity":0,})
+					}
+					this.className="ullist";
+					move(oAolp[this.index],{"opacity":100,})
+//					oAolp[this.index].style.display="block";
+				}
+				oAullist[i].onmouseout=function(){
+					oAullist[this.index].className="";
+					move(oAolp[this.index],{"opacity":0,})
+				}
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/public.css"/>
+		<style type="text/css">
+			html,body{height:100%;width:100%;}
+			#floor{position:fixed;left:20px;top:100px;height:280px;}
+			#floor #ful{height:280px;}
+			#floor #ful li{position:relative;background:#666;padding:10px 5px;width:34px;border-top:1px solid #b1aaaa;text-align: center;}
+			#floor #ful li.lifirst{background:#F00;}
+			#floor #ful li a{display:block;color:#fff;font:12px/14px "微软雅黑";}
+			#header{position:relative;top:0;left:0;height:700px;width:800px;margin:0 auto;margin-bottom:30px;}
+			.fl{width:800px;height:100%;margin:0 auto;margin-bottom:20px;font: 900 70px "";text-align: center;}
+			.fpage1{background: #f99;height:700px;}
+			.fpage2{background: #f00;height:700px;}
+			.fpage3{background: #00f;height:700px;}
+			.fpage4{background: #9f0;height:700px;}
+			.fpage5{background: #f9f;height:700px;}
+			.fpage6{background: #0f0;height:700px;}
+		</style>
+	</head>
+	<body>
+		<div id="floor">
+			<ul id="ful">
+				<li class="lifirst"><a href="#">享品质</a></li>
+				<li><a href="#">服饰美妆</a></li>
+				<li><a href="#">电脑数码</a></li>
+				<li><a href="#">3c运动</a></li>
+				<li><a href="#">爱吃</a></li>
+				<li><a href="#">回家</a></li>
+			</ul>
+		</div>
+		<div id="header" index="0">
+			<div class="fpage1 fl">first floor</div>
+			<div class="fpage2 fl">second floor</div>
+			<div class="fpage3 fl">three floor</div>
+			<div class="fpage4 fl">fourth floor</div>
+			<div class="fpage5 fl">five</div>
+			<div class="fpage6 fl">six</div>
+		</div>
+		
+		<script src="js/timeMove1.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/tween.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/public.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var oFul=document.getElementById("ful");
+			var oLi=oFul.getElementsByTagName("li");
+			var oSpan=oFul.getElementsByTagName("span");
+			var oHead=document.getElementById("header");
+			var oFl=oHead.getElementsByClassName("fl");
+//			var oUtop=oFul.offsetTop;
+//			var scrtop=document.documentElement.scrollTop||document.body.scrollTop;
+//			console.log(oUtop);
+			oHead.onOff=true;
+			//鼠标点击事件
+			for(var i=0;i<oLi.length;i++){
+				oLi[i].index=i;
+				oLi[i].onclick=function(){
+					var stop=parseInt(this.index*oFl[0].offsetHeight);
+					//console.log(stop)
+					if(oHead.onOff){
+						oHead.onOff=false;
+						timeSport(oHead,{"top":"-"+stop},1000,"linear",function(){
+							oHead.onOff=true;
+						});
+						oHead.setAttribute("index",this.index);
+					}
+					for(var i=0;i<oLi.length;i++){
+						oLi[i].className="";
+					}
+					oLi[this.index].className="lifirst";
+				}
+			}
+			//bind(oHead,"onmousewheel",onmousewheel)
+			
+			//鼠标滚轮
+			oHead.onmousewheel=function(e){
+				e=e||event;
+				var index=this.getAttribute("index");
+				var dir=e.wheelDelta;
+//				var down= true;
+//				down=e.wheelDelta?e.wheelDelta<0:e.detail>0;
+				dir=dir>0?0:1;
+//				console.log(e.wheelDelta);
+				if(dir){
+					if(++index>oFl.length-1){
+						return;
+					}
+				}else{
+					if(--index<0){
+						return;
+					}
+				}
+//				for(){
+//					
+//				}
+				var stop=parseInt(index*oFl[0].offsetHeight);
+				//console.log(stop)
+				if(this.onOff){
+					var This=this;
+					this.onOff=false;
+					timeSport(this,{"top":"-"+stop},1000,"linear",function(){
+						This.onOff=true;
+					});
+					for(var i=0;i<oLi.length;i++){
+							oLi[i].className="";
+						}
+					oLi[index].className="lifirst";
+					this.setAttribute("index",index);
+				}
+				if(e.preventDefault){/*FF 和 Chrome*/
+	                e.preventDefault();// 阻止默认事件
+	            }
+	            return false;
+			}
+			//绑定事件兼容写法
+			function bind(obj,ev,fn){
+				return obj.addEventListener?obj.addEventListener(ev,fn,false):obj.attachEvent("on"+ev,function(){
+					fn&&fn.call(obj)
+				});
+			}
+		</script>
+	</body>
+</html>
